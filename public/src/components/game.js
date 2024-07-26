@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Define the tolerance range in pixels
-        const tolerance = 50;
+        const tolerance = 180;
 
         let correct = true;
 
