@@ -1,0 +1,539 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    min-height: 100vh; /* Asegura que el contenedor ocupe al menos toda la altura de la pantalla */
+    padding-bottom: 150px; /* Espacio suficiente para el footer */
+    position: relative;
+    width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho de la pantalla */
+    box-sizing: border-box; /* Incluye padding y borde en el cálculo del ancho */
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: white;
+    padding: 10px 20px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar li {
+    margin-right: 60px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #4B0082;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #8A2BE2;
+}
+
+.special-item {
+    background-color: rgb(241, 46, 46);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 30px;
+    margin-right: 10px;
+    position: absolute;
+    top: 5px;
+    left: 180px;
+    transform: translateX(-50%);
+}
+
+.text-section {
+    color: white;
+    padding: 20px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.text-section h1 {
+    font-family: 'Georgia', serif;
+    font-size: 50px;
+    font-weight: bold;
+    color: #3d0565;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 110px;
+}
+
+.subtext {
+    color: black;
+    font-size: 16px;
+    margin-left: 110px;
+    margin-top: 30px;
+}
+
+.start-button {
+    width: 200px;
+    height: 60px;
+    background-color: rgb(16, 200, 16);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 60px;
+    margin-left: 110px;
+    margin-top: -10px; /* Ajusta el margen superior según sea necesario */
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background-color: darkgreen;
+}
+
+/* New Aqua Section */
+.aqua-section {
+    background-color: rgb(95, 206, 240);
+    width: 300px; /* Adjust the width as needed */
+    height: 100vh; /* Make it full height */
+    position: fixed; /* Fix it to the right side */
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px; 
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100px; /* Adjust the width to fit the images */
+}
+
+.x{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+/* Specific styles for the Instagram logo */
+.instagram-logo {
+    width: 35px; /* Adjust the width as needed */
+    height: 30px; /* Adjust the height as needed */
+    position: relative; /* Enables positioning */
+    top: -5px; /* Adjust the top position as needed */
+    left: -7px; /* Adjust the left position as needed */
+    margin-right: 5px;
+}
+
+/* Specific styles for the Facebook icon */
+.facebook-logo {
+    font-size: 20px; /* Adjust the size as needed */
+    position: relative; /* Enables positioning */
+    top: -1px; /* Adjust the top position as needed */
+    left: -16px; /* Adjust the left position as needed */
+}
+
+.aqua-img{
+    position: absolute;
+    width: 950px; /* Ajusta el tamaño según sea necesario */
+    top: 245px;
+    left: -950px;
+}
+
+.course-section {
+    background-color: #240a67; /* Morado oscuro */
+    width: 1145px; /* Ajusta el ancho según sea necesario */
+    padding: 20px;
+    box-sizing: border-box; /* Incluye padding y borde en el cálculo del ancho */
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    position: relative; /* Asegura que el contenido no se desborde */
+    top: 200px;
+    left: -12%;
+}
+
+.course-content {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.bottom-img{
+    width: 1190px;
+}
+
+.square {
+    width: 210px; /* Ajusta el tamaño según sea necesario */
+    height: 210px; /* Ajusta el tamaño según sea necesario */
+    border-radius: 40px; /* Hace los bordes más redondeados */
+    margin: 20px; /* Espacio alrededor de los cuadrados */
+    display: inline-block; /* Alinea los cuadrados horizontalmente */
+    transition: transform 0.3s ease;
+}
+
+/* Ajustes generales para las imágenes dentro de los cuadrados */
+.course-section .square img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px; /* Mantener las esquinas redondeadas */
+    overflow: hidden;
+}
+
+/* Ajustes específicos para cada imagen */
+.img-red {
+    width: 100%; /* Ajusta el tamaño según sea necesario */
+    height: 100%; /* Mantén la proporción de la imagen */
+}
+
+.img-yellow {
+    width: 80%; /* Ajusta el tamaño según sea necesario */
+    height: 100%; /* Mantén la proporción de la imagen */
+    margin-left: 10px;
+}
+
+.img-green {
+    width: 80%; /* Ajusta el tamaño según sea necesario */
+    height: auto; /* Mantén la proporción de la imagen */
+    margin-left: 15px;
+}
+
+.img-blue {
+    width: 75%; /* Ajusta el tamaño según sea necesario */
+    height: auto; /* Mantén la proporción de la imagen */
+    margin-left: 20px;
+}
+
+
+.square:hover {
+    transform: scale(1.1); /* Hace que el cuadrado se agrande un 10% al hacer hover */
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.box:hover {
+    transform: scale(1.1);
+}
+
+/* Footer Styles */
+footer {
+    position: relative; /* Cambia a relative para que no sea fijo */
+    width: 100%; /* Asegura que el footer ocupe todo el ancho de la pantalla */
+    background-color: #2d1273;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+#footer-space {
+    height: 370px; /* Ajusta la altura según sea necesario */
+}
+
+.circle {
+    width: 380px;
+    height: 380px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 70px;
+    transform: translateY(-50%);
+}
+
+.social-text {
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: 30%;
+    left: 490px;
+    transform: translateY(-50%);
+}
+
+.social-icons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    gap: 10px;
+}
+
+.social-icon {
+    width: 80px;
+    height: 80px;
+    background-color: black;
+    border-radius: 50%;
+    padding: 5px;
+    object-fit: contain;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .navbar li {
+        margin-right: 30px; /* Reduce el margen para pantallas más pequeñas */
+    }
+
+    .special-item {
+        left: 100px; /* Ajusta la posición para pantallas más pequeñas */
+    }
+
+    .text-section h1 {
+        font-size: 40px; /* Reduce el tamaño del texto en pantallas más pequeñas */
+        margin-left: 80px;
+    }
+
+    .subtext {
+        margin-left: 80px;
+    }
+
+    .start-button {
+        width: 180px; /* Ajusta el tamaño del botón */
+        font-size: 22px;
+    }
+
+    .aqua-section {
+        width: 250px; /* Ajusta el ancho para pantallas más pequeñas */
+    }
+
+    .image-container {
+        width: 80px; /* Ajusta el ancho para pantallas más pequeñas */
+    }
+
+    .course-section {
+        top: 400px; /* Ajusta la posición según sea necesario */
+        left: -30px; /* Ajusta la posición izquierda según sea necesario */
+    }
+
+    .square {
+        width: 180px; /* Ajusta el tamaño de los cuadrados */
+        height: 180px; /* Ajusta el tamaño de los cuadrados */
+    }
+
+    .course-content {
+        font-size: 18px; /* Reduce el tamaño del texto en pantallas más pequeñas */
+    }
+
+    .box {
+        width: 90px;
+        height: 90px;
+    }
+
+    .circle {
+        width: 320px;
+        height: 320px;
+    }
+
+    .social-text {
+        font-size: 32px; /* Reduce el tamaño del texto para pantallas más pequeñas */
+        left: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar li {
+        margin-right: 20px; /* Reduce el margen para pantallas más pequeñas */
+    }
+
+    .special-item {
+        left: 30px; /* Ajusta la posición para pantallas más pequeñas */
+    }
+
+    .text-section h1 {
+        font-size: 36px; /* Reduce aún más el tamaño del texto */
+        margin-left: -15px;
+    }
+
+    .subtext {
+        margin-left: -15px;
+        font-size: 14px;
+    }
+
+    .start-button {
+        width: 100px; /* Ajusta el tamaño del botón */
+        height: 60px;
+        font-size: 16px;
+        position: absolute; /* O relative, fixed, sticky según sea necesario */
+        top: 320px; /* Ajusta la posición desde el borde superior del contenedor */
+        left: -90px;
+    }
+
+    .aqua-section {
+        width: 200px; /* Ajusta el ancho para pantallas más pequeñas */
+    }
+
+    .image-container {
+        width: 60px; /* Ajusta el ancho para pantallas más pequeñas */
+    }
+
+    .course-section {
+        top: 150px; /* Ajusta la posición según sea necesario */
+        left: -110px; /* Ajusta la posición izquierda según sea necesario */
+        width: 101%; /* Ajusta el ancho para pantallas más pequeñas */
+        height: 100%;
+    }
+
+    .square {
+        width: 150px; /* Ajusta el tamaño de los cuadrados */
+        height: 150px; /* Ajusta el tamaño de los cuadrados */
+    }
+
+    .course-content {
+        font-size: 16px; /* Reduce el tamaño del texto en pantallas más pequeñas */
+    }
+
+    .bottom-img{
+        width: 810px;
+        bottom: 10px; /* Ajusta la distancia desde el borde inferior */
+        left: 30%; /* Ajusta la posición horizontal */
+        transform: translateX(-30%);
+    }
+
+    .box {
+        width: 80px;
+        height: 80px;
+    }
+
+    .circle {
+        width: 250px;
+        height: 250px;
+    }
+
+    .circle img {
+        width: 90%; /* Ajusta el tamaño de la imagen dentro del contenedor */
+        height: auto; /* Mantiene la proporción de la imagen */
+        object-fit: contain; /* Asegura que la imagen se ajuste dentro del contenedor */
+    }
+
+    .social-text {
+        font-size: 28px; /* Reduce el tamaño del texto para pantallas más pequeñas */
+        left: 300px;
+    }
+
+    .social-icons {
+        width: 150px; /* Ajusta el ancho del contenedor de los iconos */
+        gap: 6px; /* Reduce el espacio entre los iconos */
+        top: 55%; /* Ajusta la posición desde la parte superior */
+        left: 65%; /* Ajusta la posición desde el lado derecho */
+        transform: translate(-50%, -50%); /* Reduce el espacio entre los iconos */
+    }
+
+    .social-icon {
+        width: 50px; /* Ajusta el tamaño de los iconos */
+        height: 50px; /* Ajusta el tamaño de los iconos */
+    }
+}
+
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px 5px; /* Ajusta el padding para pantallas muy pequeñas */
+    }
+
+    .navbar li {
+        margin-right: 10px; /* Reduce el margen aún más para pantallas muy pequeñas */
+    }
+
+    .special-item {
+        left: 10px; /* Ajusta la posición para pantallas muy pequeñas */
+    }
+
+    .text-section h1 {
+        font-size: 24px; /* Reduce aún más el tamaño del texto */
+        margin-left: 10px;
+    }
+
+    .subtext {
+        margin-left: 10px;
+    }
+
+    .start-button {
+        width: 120px; /* Ajusta el tamaño del botón */
+        font-size: 18px;
+    }
+
+    .aqua-section {
+        width: 100px; /* Ajusta el ancho para pantallas muy pequeñas */
+    }
+
+    .image-container {
+        width: 50px; /* Ajusta el ancho para pantallas muy pequeñas */
+    }
+
+    .course-section {
+        top: 250px; /* Ajusta la posición según sea necesario */
+        width: 100%; /* Ajusta el ancho para pantallas muy pequeñas */
+    }
+
+    .square {
+        width: 100px; /* Ajusta el tamaño de los cuadrados */
+        height: 100px; /* Ajusta el tamaño de los cuadrados */
+    }
+
+    .course-content {
+        font-size: 14px; /* Reduce el tamaño del texto en pantallas más pequeñas */
+    }
+
+    .box {
+        width: 60px;
+        height: 60px;
+    }
+
+    .circle {
+        width: 200px;
+        height: 200px;
+    }
+
+    .social-text {
+        font-size: 20px; /* Reduce el tamaño del texto para pantallas muy pequeñas */
+        left: 150px;
+    }
+
+    .social-icons {
+        width: 120px; /* Ajusta el ancho para pantallas muy pequeñas */
+        gap: 5px;
+    }
+
+    .social-icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+

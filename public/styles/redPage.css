@@ -1,0 +1,251 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #c60000 !important;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow-y: auto; /* Ensure scrolling is enabled */
+}
+
+.vertical-bar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 200px; /* Ancho de los rectángulos */
+    background-color: #b5b5b5; /* Color amarillo */
+}
+
+.vertical-bar.left {
+    left: 80px;
+}
+
+.vertical-bar.right {
+    right: 80px;
+}
+
+.vertical-bar::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    width: 70px; /* Ancho del bookmark */
+    height: 110px; /* Alto del bookmark */
+    background-color: #c60000;
+    transform: translateX(-50%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0% 100%);
+}
+
+.outer-card {
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    max-width: 520px;
+    width: 100%;
+}
+
+.card {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    margin: 20px;
+    text-align: center;
+    overflow-y: auto; /* Enable scrolling inside the card if needed */
+    max-height: 90vh; /* Ensure the card doesn't exceed the viewport height */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card img {
+    max-width: 100%;
+    height: 500px; /* Ensure the image maintains its aspect ratio */
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: block; /* Make the image a block element */
+    margin: 0 auto; /* Center the image horizontally */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #c60000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: glow 1.5s infinite alternate;
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+}
+
+.card h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 3px;
+    background-color: #ff0000;
+    border-radius: 3px;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px rgba(255, 64, 0, 0.8), 0 0 10px rgba(255, 64, 0, 1);
+    }
+    100% {
+        text-shadow: 0 0 5px rgba(255, 64, 0, 0.8), 0 0 10px rgba(255, 64, 0, 1);
+    }
+}
+
+.card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #c60000;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+    animation: slide-in 1s ease-in-out;
+    background-color: #ffe4e1;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card h2::before {
+    content: '⭐';
+    position: absolute;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.card h2::after {
+    content: '⭐';
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.card h2:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.card p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+.card p:hover {
+    color: #333;
+}
+
+/* .card video {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card video:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+} */
+
+.screen {
+    width: 100%;
+    height: auto; /* Ensure the aspect ratio is maintained */
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow to add depth */
+}
+
+.screen:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Additional styles */
+.screen {
+    max-height: 500px; /* Set a maximum height */
+    overflow: hidden; /* Ensure content fits within the boundaries */
+    border: 1px solid #ddd; /* Light border for a cleaner look */
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff6b6b, #f94d6a);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow to the button text */
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, #f94d6a, #ff6b6b);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 15px;
+    }
+
+    .card h1 {
+        font-size: 20px;
+    }
+
+    .card h2 {
+        font-size: 18px;
+    }
+
+    .card p {
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+    }
+}
