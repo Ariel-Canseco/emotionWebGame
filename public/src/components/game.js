@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const faceContainer = document.querySelector('.face-container');
     const validateButton = document.getElementById('validateButton');
 
+    const victorySound = document.getElementById('victory-sound');
+    const failureSound = document.getElementById('failure-sound');
+
     const urlParams = new URLSearchParams(window.location.search);
     const targetImageId = urlParams.get('id') || 'alegria'; // Default to 'alegria' if no param is provided
 
@@ -49,12 +52,41 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const id = e.dataTransfer.getData('text');
         const draggable = document.getElementById(id);
+
+        const faceRect = faceContainer.getBoundingClientRect();
+
+        // Coordenadas de las posiciones esperadas para las partes de la cara
+        const parts = {
+            'alegria': { left: 972, top: 270 },
+            'enojo': { left: 972, top: 270 },
+            'miedo': { left: 972, top: 270 },
+            'tristeza': { left: 972, top: 270 },
+        };
+
+        // Coordenadas donde se suelta la parte
         const offsetX = e.clientX - draggable.clientWidth / 2;
         const offsetY = e.clientY - draggable.clientHeight / 2;
 
-        draggable.style.position = 'absolute';
-        draggable.style.left = `${offsetX}px`;
-        draggable.style.top = `${offsetY}px`;
+        // Verificar si se suelta dentro del contenedor de la cara
+        if (
+            e.clientX > faceRect.left && e.clientX < faceRect.right &&
+            e.clientY > faceRect.top && e.clientY < faceRect.bottom
+        ) {
+            const targetPosition = parts[id];
+            if (targetPosition) {
+                draggable.style.position = 'absolute';
+                draggable.style.left = `${faceRect.left + targetPosition.left - faceContainer.offsetLeft}px`;
+                draggable.style.top = `${faceRect.top + targetPosition.top - faceContainer.offsetTop}px`;
+            } else {
+                draggable.style.position = 'absolute';
+                draggable.style.left = `${offsetX}px`;
+                draggable.style.top = `${offsetY}px`;
+            }
+        } else {
+            draggable.style.position = 'absolute';
+            draggable.style.left = `${offsetX}px`;
+            draggable.style.top = `${offsetY}px`;
+        }
 
         // Mostrar posición en tiempo real
         console.log(`${id} - Left: ${draggable.style.left}, Top: ${draggable.style.top}`);
@@ -126,19 +158,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (correct) {
             showConfetti();
+            victorySound.play();  // Reproduce el sonido de victoria
             successMessage.classList.add('show');
             overlay.classList.add('show');
             setTimeout(() => {
                 successMessage.classList.remove('show');
                 overlay.classList.remove('show');
-            }, 3000); // Mostrar el mensaje por 3 segundos
+            }, 9500); // Mostrar el mensaje de éxito por 7 segundos
         } else {
+            failureSound.play();  // Reproduce el sonido de fracaso
             errorMessage.classList.add('show');
             overlay.classList.add('show');
             setTimeout(() => {
                 errorMessage.classList.remove('show');
                 overlay.classList.remove('show');
-            }, 3000); // Mostrar el mensaje por 3 segundos
+            }, 3000); // Mostrar el mensaje de fracaso por 5 segundos
         }
     }
 
@@ -159,9 +193,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         confetti({
-            particleCount: 500, // Incrementar la cantidad de confeti
-            spread: 90,
-            origin: { y: 0.6 }
+            particleCount: 1500, // Incrementar la cantidad de confeti
+            spread: 160, // Ajustar la dispersión para mayor efecto
+            origin: { y: 0.6 },
+            zIndex: 9999 // Asegúrate de que el confeti esté siempre en la parte superior
         });
+
+        setTimeout(() => {
+            canvas.remove();
+        }, 7000); // Duración del confeti
+    }
+    // Script para ajustar dinámicamente el enlace de regreso
+    const backButton = document.getElementById('backButton');
+    switch (targetImageId) {
+        case 'alegria':
+            backButton.href = '../pages/yellowPage.html';
+            break;
+        case 'enojo':
+            backButton.href = '../pages/redPage.html';
+            break;
+        case 'miedo':
+            backButton.href = '../pages/greenPage.html';
+            break;
+        case 'tristeza':
+            backButton.href = '../pages/bluePage.html';
+            break;
+        default:
+            backButton.href = '../../index.html';
     }
 });

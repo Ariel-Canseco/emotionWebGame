@@ -25,12 +25,24 @@
             <img src="../img/7.png" alt="Miedo" class="draggable" id="miedo">
             <img src="../img/5.png" alt="Tristeza" class="draggable" id="tristeza">
         </div>
-        <button id="validateButton">Finalizar</button>
+
+        <div class="button-container">
+            <a id="backButton" class="btn btn-back" href="#">Volver</a>
+            <button id="validateButton" class="btn">Finalizar</button>
+            <a href="../../index.html" class="btn btn-main-menu">Menú Principal</a>
+        </div>
+        
+    
     </div>
     <div class="message-overlay">
         <div class="success-message">¡Felicidades, has completado el rostro correctamente!</div>
         <div class="error-message">Lo siento, no has colocado la parte correctamente.</div>
     </div>
+
+    <!-- Audio elements -->
+    <audio id="victory-sound" src="../sounds/victory.mpeg"></audio>
+    <audio id="failure-sound" src="../sounds/failure.mpeg"></audio>
+    
     <script src="../src/components/game.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.7.0/dist/confetti.browser.min.js"></script>
 </body>

@@ -107,7 +107,6 @@ body {
     z-index: 1; /* Asegurar que el texto esté por encima de la capa de brillo */
 }
 
-
 .face-container {
     position: relative;
     margin-bottom: 20px;
@@ -122,7 +121,7 @@ body {
 }
 
 #empty-face {
-    width: 100%;
+    width: 80%;
     height: auto;
     border: none; /* Quitar el borde blanco de las imágenes */
 }
@@ -137,8 +136,8 @@ body {
 }
 
 .draggable {
-    width: 180px; /* Ajusta el tamaño según sea necesario */
-    height: auto;
+    width: 140px; /* Ajusta el tamaño según sea necesario */
+    height: 140px;
     cursor: pointer;
     border: 2px solid transparent; /* Quitar el borde visible de las imágenes */
     padding: 5px;
@@ -157,20 +156,25 @@ body {
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 8px 16px; /* Reducir padding */
+    font-size: 14px; /* Reducir tamaño de fuente */
     cursor: pointer;
-    background-color: #4CAF50; /* Color de fondo verde */
-    color: white;
     border: none;
+    background-color: #ff9800;
+    color: #ffffff;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s;
-    margin-top: 20px; /* Espaciado superior para el botón */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #45a049; /* Cambio de color al pasar el cursor */
+    background-color: #fb8c00;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 .message-overlay {
@@ -235,6 +239,52 @@ button:hover {
     transform: scale(1); /* Escalar a tamaño normal */
 }
 
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 8px 16px; /* Reducir padding */
+    font-size: 14px; /* Reducir tamaño de fuente */
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #ff9800;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #fb8c00;
+    transform: translateY(-2px);
+}
+
+.btn-back {
+    background-color: #2196f3;
+    padding-top: 15px !important;
+}
+
+.btn-back:hover {
+    background-color: #1e88e5;
+}
+
+.btn-main-menu {
+    background-color: #4caf50;
+}
+
+.btn-main-menu:hover {
+    background-color: #43a047;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px; /* Espacio arriba del contenedor de botones */
+}
+
+.button-container .btn {
+    flex: 1; /* Hacer que los botones tengan el mismo tamaño */
+    text-align: center; /* Asegurar que el texto esté centrado */
+}
 
 .confetti-canvas {
     position: absolute;
@@ -244,7 +294,6 @@ button:hover {
     height: 100%;
     pointer-events: none; /* Permitir clics a través del canvas */
 }
-
 
 /* Media Queries para hacer el diseño responsive */
 @media (max-width: 768px) {
@@ -257,8 +306,8 @@ button:hover {
     }
 
     button {
-        padding: 8px 16px;
-        font-size: 14px;
+        padding: 6px 12px; /* Reducir padding */
+        font-size: 12px; /* Reducir tamaño de fuente */
     }
 }
 
@@ -272,8 +321,8 @@ button:hover {
     }
 
     button {
-        padding: 6px 12px;
-        font-size: 12px;
+        padding: 4px 8px; /* Reducir padding */
+        font-size: 10px; /* Reducir tamaño de fuente */
     }
 
     .demo img {
