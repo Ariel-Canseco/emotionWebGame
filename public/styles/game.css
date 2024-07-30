@@ -75,7 +75,7 @@ body {
     margin-bottom: 20px;
     font-size: 36px; /* Tamaño grande para destacar */
     font-weight: bold; /* Negrita para más impacto */
-    color: #ffffff; /* Color blanco del texto */
+    /* color: #181818; */
     background: #3f51b5; /* Color de fondo vibrante */
     padding: 15px 25px; /* Espaciado interno para el texto */
     border-radius: 10px; /* Esquinas redondeadas */
@@ -85,7 +85,7 @@ body {
     text-transform: uppercase; /* Transformar el texto a mayúsculas */
     letter-spacing: 2px; /* Espaciado entre letras */
     font-family: 'Comic Sans MS', cursive; /* Fuente de tipo cómic */
-    background-image: linear-gradient(135deg, #3f51b5, #2196f3); /* Gradiente de fondo para un efecto moderno */
+    /* background-image: linear-gradient(135deg, #3f51b5, #2196f3);  */
     background-clip: padding-box; /* Clip del fondo al padding del elemento */
     position: relative;
     overflow: hidden; /* Ocultar cualquier contenido fuera del borde */
@@ -294,6 +294,37 @@ button:active {
     height: 100%;
     pointer-events: none; /* Permitir clics a través del canvas */
 }
+
+/* Añadir estas clases a tu CSS */
+
+.emotion-alegria {
+    background-color: #ffeb3b !important; /* Amarillo */
+    background-image: linear-gradient(135deg, #eae552, #ffeb3b);
+    color: #181818;
+}
+
+.emotion-enojo {
+    background-color: #f44336; /* Rojo */
+    color: #181818;
+}
+
+.emotion-miedo {
+    background-color: #9c27b0; /* Morado */
+    color: #ffffff !important;
+}
+
+.emotion-tristeza {
+    background-color: #2196f3; /* Azul */
+    color: #fff !important;
+}
+
+.disabled {
+    pointer-events: none; /* Evita que el enlace sea clickeable */
+    opacity: 0.5; /* Cambia la apariencia para mostrar que está deshabilitado */
+    cursor: not-allowed; /* Muestra un cursor indicando que está deshabilitado */
+}
+
+
 
 /* Media Queries para hacer el diseño responsive */
 @media (max-width: 768px) {

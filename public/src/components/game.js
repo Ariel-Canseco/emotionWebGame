@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const draggables = document.querySelectorAll('.draggable');
     const faceContainer = document.querySelector('.face-container');
     const validateButton = document.getElementById('validateButton');
+    
+    const backButton = document.getElementById('backButton');
+    const mainButton = document.getElementById('mainButton');
 
     const victorySound = document.getElementById('victory-sound');
     const failureSound = document.getElementById('failure-sound');
@@ -9,21 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const targetImageId = urlParams.get('id') || 'alegria'; // Default to 'alegria' if no param is provided
 
-    // Mapeo de emociones a nombres
-    const emotionNames = {
-        alegria: "Alegría",
-        enojo: "Enojo",
-        miedo: "Miedo",
-        tristeza: "Tristeza"
+    // Mapeo de emociones a nombres, colores de fondo y colores de texto
+    const emotionDetails = {
+        alegria: { name: "Alegría", color: "#ffeb3b", textColor: "#000000" },
+        enojo: { name: "Enojo", color: "#f44336", textColor: "#000000" },
+        miedo: { name: "Miedo", color: "#9c27b0", textColor: "#ffffff" },
+        tristeza: { name: "Tristeza", color: "#2196f3", textColor: "#ffffff" }
     };
 
-    // Actualizar el contenido del elemento h2
+    // Actualizar el contenido, color de fondo y color de texto del elemento h2
     const emotionNameElement = document.getElementById('emotion-name');
-    if (emotionNames[targetImageId]) {
-        emotionNameElement.textContent = `Emoción: ${emotionNames[targetImageId]}`;
-    } else {
-        emotionNameElement.textContent = "Emoción: No especificada";
-    }
+    const emotionDetail = emotionDetails[targetImageId] || { name: "No especificada", color: "#ffffff", textColor: "#000000" };
+    
+    emotionNameElement.textContent = `Emoción: ${emotionDetail.name}`;
+    emotionNameElement.style.backgroundColor = emotionDetail.color;
+    emotionNameElement.style.color = emotionDetail.textColor; // Cambiar el color del texto
 
     draggables.forEach(draggable => {
         draggable.addEventListener('dragstart', dragStart);
@@ -156,6 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
         errorMessage.classList.remove('show');
         overlay.classList.remove('show');
 
+        // Deshabilitar botones y enlaces
+        disableLinks(true);
+
         if (correct) {
             showConfetti();
             victorySound.play();  // Reproduce el sonido de victoria
@@ -164,6 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 successMessage.classList.remove('show');
                 overlay.classList.remove('show');
+                // Habilitar botones y enlaces después de la animación de éxito
+                disableLinks(false);
             }, 9500); // Mostrar el mensaje de éxito por 7 segundos
         } else {
             failureSound.play();  // Reproduce el sonido de fracaso
@@ -172,7 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 errorMessage.classList.remove('show');
                 overlay.classList.remove('show');
-            }, 3000); // Mostrar el mensaje de fracaso por 5 segundos
+                // Habilitar botones y enlaces después de la animación de fracaso
+                disableLinks(false);
+            }, 3000); // Mostrar el mensaje de fracaso por 3 segundos
         }
     }
 
@@ -203,8 +213,26 @@ document.addEventListener('DOMContentLoaded', () => {
             canvas.remove();
         }, 7000); // Duración del confeti
     }
+
+    // Función para habilitar o deshabilitar los enlaces
+    function disableLinks(disable) {
+        const links = document.querySelectorAll('#validateButton, #backButton, #mainButton');
+        links.forEach(link => {
+            if (disable) {
+                link.classList.add('disabled');
+                link.addEventListener('click', preventDefault, true); // Prevenir clics
+            } else {
+                link.classList.remove('disabled');
+                link.removeEventListener('click', preventDefault, true); // Permitir clics
+            }
+        });
+    }
+
+    function preventDefault(e) {
+        e.preventDefault();
+    }
+
     // Script para ajustar dinámicamente el enlace de regreso
-    const backButton = document.getElementById('backButton');
     switch (targetImageId) {
         case 'alegria':
             backButton.href = '../pages/yellowPage.html';
