@@ -113,18 +113,20 @@ body {
     width: 100%;
     max-width: 300px;
     height: auto;
-    border: 2px dashed #ff5722; /* Borde colorido para el contenedor del rostro */
+    border: 2px dashed #ff5722;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fce4ec; /* Fondo suave para el contenedor del rostro */
+    background-color: #fce4ec;
+    z-index: 1;
 }
 
 #empty-face {
     width: 80%;
     height: auto;
-    border: none; /* Quitar el borde blanco de las imágenes */
+    border: none;
 }
+
 
 .parts-container {
     display: flex;
@@ -136,20 +138,24 @@ body {
 }
 
 .draggable {
-    width: 140px; /* Ajusta el tamaño según sea necesario */
-    height: 140px;
-    cursor: pointer;
-    border: 2px solid transparent; /* Quitar el borde visible de las imágenes */
-    padding: 5px;
+    position: relative;
+    width: 140px;
+    height: auto;
+    /* cursor: pointer; */
+    border: 2px solid transparent; 
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: transparent; /* Fondo transparente para las imágenes */
-    transition: transform 0.3s;
+    background-color: transparent;
+    /* transition: transform 0.3s; */
+    z-index: 10;
+    background-size: cover;
+    pointer-events: auto;
 }
 
 .draggable:hover {
     transform: scale(1.1); /* Efecto de agrandamiento al pasar el cursor */
 }
+
 
 .dragging {
     opacity: 0.5;
@@ -249,30 +255,49 @@ button:active {
     color: white;
     background-color: #ff9800;
     border-radius: 5px;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombreado sutil */
+    background-image: linear-gradient(145deg, #ff9800, #ff5722); /* Gradiente de color */
+    background-blend-mode: multiply; /* Mezcla de fondo para textura */
 }
 
 .btn:hover {
     background-color: #fb8c00;
     transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombreado más pronunciado en hover */
 }
 
 .btn-back {
     background-color: #2196f3;
     padding-top: 15px !important;
+    background-image: linear-gradient(145deg, #2196f3, #1976d2); /* Gradiente de color */
 }
 
 .btn-back:hover {
     background-color: #1e88e5;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombreado más pronunciado en hover */
 }
 
 .btn-main-menu {
-    background-color: #4caf50;
+    background-color: #8c4caf;
+    background-image: linear-gradient(145deg, #8c4caf, #7b4f77); /* Gradiente de color */
 }
 
 .btn-main-menu:hover {
-    background-color: #43a047;
+    background-color: #8c4caf;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombreado más pronunciado en hover */
 }
+
+.btn-reiniciar {
+    background-color: #ca1717;
+    background-image: linear-gradient(145deg, #ca1717, #b71c1c); /* Gradiente de color */
+}
+
+.btn-reiniciar:hover {
+    background-color: #ca1717;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombreado más pronunciado en hover */
+}
+
 
 .button-container {
     display: flex;
@@ -325,38 +350,48 @@ button:active {
 }
 
 
+/*** Media Queries para hacer el diseño más responsivo */
+@media (max-width: 1200px) {
+    .face-container {
+        width: 250px;
+    }
 
-/* Media Queries para hacer el diseño responsive */
+    .draggable {
+        width: 120px;
+    }
+}
+
 @media (max-width: 768px) {
+    .face-container {
+        width: 200px;
+    }
+
+    .draggable {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 875px) {
+    .face-container {
+        width: 150px;
+    }
+
     .draggable {
         width: 80px;
-    }
-
-    .face-container {
-        max-width: 250px;
-    }
-
-    button {
-        padding: 6px 12px; /* Reducir padding */
-        font-size: 12px; /* Reducir tamaño de fuente */
+        height: 80px;
+        left: 0;
+        top: 160;
     }
 }
 
 @media (max-width: 480px) {
-    .draggable {
-        width: 60px;
-    }
-
     .face-container {
-        max-width: 200px;
+        width: 150px;
     }
 
-    button {
-        padding: 4px 8px; /* Reducir padding */
-        font-size: 10px; /* Reducir tamaño de fuente */
-    }
-
-    .demo img {
-        width: 80%;
+    .draggable {
+        width: 80px;
+        height: 80px;
     }
 }

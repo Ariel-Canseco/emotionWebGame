@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const draggables = document.querySelectorAll('.draggable');
     const faceContainer = document.querySelector('.face-container');
     const validateButton = document.getElementById('validateButton');
-    
     const backButton = document.getElementById('backButton');
     const mainButton = document.getElementById('mainButton');
 
@@ -12,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const targetImageId = urlParams.get('id') || 'alegria'; // Default to 'alegria' if no param is provided
 
-    // Mapeo de emociones a nombres, colores de fondo y colores de texto
     const emotionDetails = {
         alegria: { name: "Alegría", color: "#ffeb3b", textColor: "#000000" },
         enojo: { name: "Enojo", color: "#f44336", textColor: "#000000" },
@@ -20,80 +18,56 @@ document.addEventListener('DOMContentLoaded', () => {
         tristeza: { name: "Tristeza", color: "#2196f3", textColor: "#ffffff" }
     };
 
-    // Actualizar el contenido, color de fondo y color de texto del elemento h2
     const emotionNameElement = document.getElementById('emotion-name');
     const emotionDetail = emotionDetails[targetImageId] || { name: "No especificada", color: "#ffffff", textColor: "#000000" };
-    
+
     emotionNameElement.textContent = `Emoción: ${emotionDetail.name}`;
     emotionNameElement.style.backgroundColor = emotionDetail.color;
-    emotionNameElement.style.color = emotionDetail.textColor; // Cambiar el color del texto
+    emotionNameElement.style.color = emotionDetail.textColor;
 
-    draggables.forEach(draggable => {
-        draggable.addEventListener('dragstart', dragStart);
-        draggable.addEventListener('dragend', dragEnd);
+    interact('.draggable')
+        .draggable({
+            listeners: {
+                start(event) {
+                    event.target.classList.add('dragging');
+                },
+                end(event) {
+                    event.target.classList.remove('dragging');
+                    // Make sure the element stays at its last position
+                    event.target.style.transform = '';
+                }
+            }
+        })
+        .on('dragmove', function (event) {
+            let x = (parseFloat(event.target.getAttribute('data-x')) || 0) + event.dx;
+            let y = (parseFloat(event.target.getAttribute('data-y')) || 0) + event.dy;
+
+            // Update the position of the element
+            event.target.style.transform = `translate(${x}px, ${y}px)`;
+            event.target.setAttribute('data-x', x);
+            event.target.setAttribute('data-y', y);
+        });
+
+    interact('.face-container').dropzone({
+        accept: '.draggable',
+        overlap: 'pointer',
+        ondrop: function (event) {
+            const draggable = event.relatedTarget;
+            // Ensure the draggable is appended to the container
+            faceContainer.appendChild(draggable);
+            // Reset position to the coordinates where it was dropped
+            draggable.style.transform = '';
+            draggable.style.position = 'absolute';
+            draggable.style.left = `${event.clientX}px`;
+            draggable.style.top = `${event.clientY}px`;
+        }
     });
-
-    document.addEventListener('dragover', dragOver);
-    document.addEventListener('drop', drop);
 
     validateButton.addEventListener('click', validateFace);
 
-    function dragStart(e) {
-        e.dataTransfer.setData('text/plain', e.target.id);
-        e.target.classList.add('dragging');
-    }
-
-    function dragEnd(e) {
-        e.target.classList.remove('dragging');
-    }
-
-    function dragOver(e) {
-        e.preventDefault();
-    }
-
-    function drop(e) {
-        e.preventDefault();
-        const id = e.dataTransfer.getData('text');
-        const draggable = document.getElementById(id);
-
-        const faceRect = faceContainer.getBoundingClientRect();
-
-        // Coordenadas de las posiciones esperadas para las partes de la cara
-        const parts = {
-            'alegria': { left: 972, top: 270 },
-            'enojo': { left: 972, top: 270 },
-            'miedo': { left: 972, top: 270 },
-            'tristeza': { left: 972, top: 270 },
-        };
-
-        // Coordenadas donde se suelta la parte
-        const offsetX = e.clientX - draggable.clientWidth / 2;
-        const offsetY = e.clientY - draggable.clientHeight / 2;
-
-        // Verificar si se suelta dentro del contenedor de la cara
-        if (
-            e.clientX > faceRect.left && e.clientX < faceRect.right &&
-            e.clientY > faceRect.top && e.clientY < faceRect.bottom
-        ) {
-            const targetPosition = parts[id];
-            if (targetPosition) {
-                draggable.style.position = 'absolute';
-                draggable.style.left = `${faceRect.left + targetPosition.left - faceContainer.offsetLeft}px`;
-                draggable.style.top = `${faceRect.top + targetPosition.top - faceContainer.offsetTop}px`;
-            } else {
-                draggable.style.position = 'absolute';
-                draggable.style.left = `${offsetX}px`;
-                draggable.style.top = `${offsetY}px`;
-            }
-        } else {
-            draggable.style.position = 'absolute';
-            draggable.style.left = `${offsetX}px`;
-            draggable.style.top = `${offsetY}px`;
-        }
-
-        // Mostrar posición en tiempo real
-        console.log(`${id} - Left: ${draggable.style.left}, Top: ${draggable.style.top}`);
-    }
+    restartButton.addEventListener('click', () => {
+        location.reload(); // Reload the page
+    });
 
     function validateFace() {
         const parts = {
@@ -103,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'tristeza': { left: 90, top: 70 }
         };
 
-        // Define the tolerance range in pixels
         const tolerance = 180;
 
         let correct = true;
@@ -127,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log(`${targetImageId} - Expected: Left: ${targetPosition.left}, Top: ${targetPosition.top}, Actual: Left: ${left}, Top: ${top}`);
 
-        // Check if the part is within the tolerance range and inside the face container
         if (
             Math.abs(left - targetPosition.left) > tolerance ||
             Math.abs(top - targetPosition.top) > tolerance ||
@@ -137,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
             correct = false;
         }
 
-        // Check if there are any incorrect parts inside the face container
         draggables.forEach(draggable => {
             if (draggable.id !== targetImageId) {
                 const draggableRect = draggable.getBoundingClientRect();
@@ -154,40 +125,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const successMessage = document.querySelector('.success-message');
         const errorMessage = document.querySelector('.error-message');
 
-        // Reset message visibility
         successMessage.classList.remove('show');
         errorMessage.classList.remove('show');
         overlay.classList.remove('show');
 
-        // Deshabilitar botones y enlaces
         disableLinks(true);
 
         if (correct) {
             showConfetti();
-            victorySound.play();  // Reproduce el sonido de victoria
+            victorySound.play();
             successMessage.classList.add('show');
             overlay.classList.add('show');
             setTimeout(() => {
                 successMessage.classList.remove('show');
                 overlay.classList.remove('show');
-                // Habilitar botones y enlaces después de la animación de éxito
                 disableLinks(false);
-            }, 9500); // Mostrar el mensaje de éxito por 7 segundos
+            }, 9500);
         } else {
-            failureSound.play();  // Reproduce el sonido de fracaso
+            failureSound.play();
             errorMessage.classList.add('show');
             overlay.classList.add('show');
             setTimeout(() => {
                 errorMessage.classList.remove('show');
                 overlay.classList.remove('show');
-                // Habilitar botones y enlaces después de la animación de fracaso
                 disableLinks(false);
-            }, 3000); // Mostrar el mensaje de fracaso por 3 segundos
+            }, 3000);
         }
     }
 
     function showConfetti() {
-        // Asegúrate de que solo haya un solo canvas de confeti en el DOM
         const existingCanvas = document.querySelector('.confetti-canvas');
         if (existingCanvas) {
             existingCanvas.remove();
@@ -203,27 +169,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         confetti({
-            particleCount: 1500, // Incrementar la cantidad de confeti
-            spread: 160, // Ajustar la dispersión para mayor efecto
+            particleCount: 1500,
+            spread: 160,
             origin: { y: 0.6 },
-            zIndex: 9999 // Asegúrate de que el confeti esté siempre en la parte superior
+            zIndex: 9999
         });
 
         setTimeout(() => {
             canvas.remove();
-        }, 7000); // Duración del confeti
+        }, 7000);
     }
 
-    // Función para habilitar o deshabilitar los enlaces
     function disableLinks(disable) {
-        const links = document.querySelectorAll('#validateButton, #backButton, #mainButton');
+        const links = document.querySelectorAll('#validateButton, #backButton, #mainButton, #reiniciar');
         links.forEach(link => {
             if (disable) {
                 link.classList.add('disabled');
-                link.addEventListener('click', preventDefault, true); // Prevenir clics
+                link.addEventListener('click', preventDefault, true);
             } else {
                 link.classList.remove('disabled');
-                link.removeEventListener('click', preventDefault, true); // Permitir clics
+                link.removeEventListener('click', preventDefault, true);
             }
         });
     }
@@ -232,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
     }
 
-    // Script para ajustar dinámicamente el enlace de regreso
     switch (targetImageId) {
         case 'alegria':
             backButton.href = '../pages/yellowPage.html';
